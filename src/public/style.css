@@ -1,0 +1,124 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #343541;
+  color: white;
+}
+
+header {
+  background-color: #343541;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  position: relative; /* Needed for absolute positioning of the title */
+  margin-bottom: 2px;
+}
+
+.header-title {
+  position: absolute;
+  right: 1100px; /* Adjust as needed */
+  top: 10px; /* Adjust as needed */
+  color: white;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: bold;
+}
+
+.search-bar {
+  display: flex;
+  width: 50%; /* Adjust width as needed */
+  position: relative;
+}
+
+.search-bar input {
+  width: 82%;
+  padding: 10px;
+  border-radius: 20px 0 0 20px;
+  border: none;
+  font-size: 16px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border-radius: 0 20px 20px 0;
+  border: none;
+  background-color: #1a73e8;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+main {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  justify-content: space-around;
+  padding: 20px;
+  height: calc(100vh - 40px); /* Adjust the height to account for header and padding */
+}
+
+#videoPlayer {
+  width: 70%; /* Adjust width as needed */
+  height: 100%; /* Make video take full height of the main container */
+  padding: 10px; /* Optional: add padding if you want some space around the video */
+}
+
+.timestamp {
+  background-color: #263850; /* Lighter blue background */
+  color: #007bff; /* Blue text */
+  border-radius: 8px; /* Less rounded corners */
+  padding: 0 4px; /* Padding inside the timestamp */
+  font: 13px Roboto, Arial, sans-serif;
+  font-size: 1.0rem; /* Adjust the font size as needed */
+  font-weight: 500;
+  line-height: 1.8rem;
+  margin-right: 10px;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.75); /* Softer glow effect */
+  display: inline-block;
+  margin-bottom: 10px; /* Space between timestamp elements */
+  text-shadow: 0 0 2px #000000; /* Text shadow for better contrast */
+}
+
+.text {
+color: #fff;
+margin-left: 10px; /* Adjust as needed */
+flex-grow: 1; /* Takes up the remaining space in the flex container */
+}
+
+.subtitle {
+display: flex;
+align-items: center;
+margin-bottom: 5px;
+font-family: 'Arial', sans-serif;
+}
+
+main {
+  display: flex;
+  align-items: stretch; /* Stretch items to fill the container */
+  padding: 20px;
+  height: calc(100vh - 60px); /* Adjust the height to account for header and padding */
+  box-sizing: border-box; /* Include padding and border in the element's total height */
+}
+
+#videoPlayer {
+  flex-grow: 2; /* Allow video to fill extra space */
+  width: auto; /* Adjust width automatically */
+  height: 100%; /* Make video take full height of the main container */
+  padding: 10px; /* Optional: add padding if you want some space around the video */
+  box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
+#transcripts {
+  flex-grow: 1; /* Allow transcripts to fill up the remaining space */
+  width: 30%; /* Fixed width */
+  max-width: 30%; /* Ensure width does not exceed 30% */
+  height: 100%; /* Make transcripts take full height of the main container */
+  overflow-y: auto; /* Add scroll for overflow */
+  border: 1px solid white; /* Add white border */
+  padding: 20px; /* Add padding inside the transcripts block */
+  box-sizing: border-box; /* Include padding and border in the width and height */
+}
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Transcript Fetcher</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <header>
+        <div class="search-bar">
+            <div class="header-title">Dznes Transcript</div>
+            <input type="text" id="videoId" placeholder="Enter YouTube Video ID">
+            <button id="getTranscript">Get Transcript</button>
+        </div>
+    </header>
+    <main>
+        <iframe id="videoPlayer"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" <!-- Placeholder video ID -->
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+        <div id="transcripts">
+            <!-- Transcripts will be displayed here -->
+        </div>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const videoIdInput = document.getElementById('videoId');
+          const getTranscriptButton = document.getElementById('getTranscript');
+          const videoPlayer = document.getElementById('videoPlayer');
+          const transcripts = document.getElementById('transcripts');
+      
+          getTranscriptButton.addEventListener('click', async function() {
+              const videoId = videoIdInput.value.trim();
+              if (videoId) {
+                  const embedUrl = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}`;
+                  videoPlayer.src = embedUrl; // Update the video player's URL
+                  
+                  // Fetch the subtitles
+                  try {
+                      const response = await fetch(`/video-transcript?videoId=${videoId}`);
+                      const data = await response.json();
+                      transcripts.innerHTML = ''; // Clear previous subtitles
+
+                      if (data.subtitles && data.subtitles.length > 0) {
+                          data.subtitles.forEach(sub => {
+                              const subtitleDiv = document.createElement('div');
+                              subtitleDiv.classList.add('subtitle');
+
+                              const timestampSpan = document.createElement('span');
+                              timestampSpan.classList.add('timestamp');
+                              timestampSpan.textContent = new Date(sub.start * 1000).toISOString().substr(14, 5);
+
+                              const textSpan = document.createElement('span');
+                              textSpan.classList.add('text');
+                              textSpan.textContent = sub.text;
+
+                              subtitleDiv.appendChild(timestampSpan);
+                              subtitleDiv.appendChild(textSpan);
+                              transcripts.appendChild(subtitleDiv);
+                          });
+                      } else {
+                          transcripts.textContent = 'No subtitles found or an error occurred.';
+                      }
+                  } catch (error) {
+                      transcripts.textContent = 'Failed to fetch subtitles.';
+                  }
+              }
+          });
+      });
+    </script>
+</body>
+</html>
